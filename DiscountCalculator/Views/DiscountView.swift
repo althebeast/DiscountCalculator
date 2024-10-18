@@ -10,10 +10,9 @@ import SwiftUI
 struct DiscountView: View {
     
     @State private var discountAmount = 0.0
-    @State private var salesPrice = 0.0
+    @State private var salesPrice = ""
     @State private var isAnimating = false
     @State private var animate = false
-    @State private var showAlert = false
     
     @State private var resultOfDiscount: Double = 0.0
     @State private var youSavedAmount: Double = 0.0
@@ -21,35 +20,40 @@ struct DiscountView: View {
     let screenSize: CGRect = UIScreen.main.bounds
     
     var body: some View {
-        ZStack {
-            
-            backgroundColor()
-            
-            ZStack {
-                HStack {
-                    calculatedAmountView()
+            VStack {
+                ZStack {
+                    
+                    backgroundColor()
+                    
+                    ZStack {
+                        HStack {
+                            calculatedAmountView()
+                        }
+                        VStack(spacing: 40) {
+                            
+                            DiscountImageView()
+                            
+                            sliderView()
+                                .offset(y: isAnimating ? -750 : 0)
+                                .animation(.default, value: isAnimating)
+                                .tint(.red)
+
+                            calculateButton()
+                            
+                            calculateAnotherAmountButton()
+                        }
+                        .padding()
+                        .onAppear(perform: addAnimation)
+                    }
                 }
-                VStack(spacing: 40) {
-                    
-                    DiscountImageView()
-                    
-                    sliderView()
-                        .offset(y: isAnimating ? -750 : 0)
-                        .animation(.default, value: isAnimating)
-                        .tint(.red)
-                    
-                    calculateButton()
-                    
-                    calculateAnotherAmountButton()
-                }
-                .padding()
-                .onAppear(perform: addAnimation)
             }
-        }
+            .onTapGesture {
+                hideKeyboard()
+            }
     }
     
     func calculateThePriceAfterDiscount() {
-        let convertedPrice = salesPrice
+        let convertedPrice = Double(salesPrice) ?? 0
         let convertedDiscount = discountAmount
         let convertedDiscountRate = convertedDiscount / 100
         let multiple = convertedPrice * convertedDiscountRate
@@ -78,9 +82,18 @@ struct DiscountView: View {
     DiscountView()
 }
 
+// Extension to hide the keyboard
+#if canImport(UIKit)
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+#endif
+
 extension DiscountView {
     private func backgroundColor() -> some View {
-        LinearGradient(colors: [Color("Background2"), Color("Background1")], startPoint: .top, endPoint: .bottom)
+        LinearGradient(colors: [Color("Background5"), Color("Background3")], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
     }
 }
@@ -89,10 +102,10 @@ extension DiscountView {
     private func DiscountImageView() -> some View {
         Image("discounts")
             .resizable()
-            .frame(width: 200, height: 200)
+            .frame(width: 150, height: 150)
             .rotationEffect(animate ? .degrees(-20) : .degrees(20))
             .rotationEffect(.degrees(-65))
-            .offset(y: isAnimating ? -750 : 0)
+            .offset(y: isAnimating ? -750 : 20)
             .animation(.default, value: isAnimating)
             .frame(maxWidth: .infinity)
             .padding(.leading, 50)
@@ -114,20 +127,19 @@ extension DiscountView {
                                step: 5)
                         Text("100")
                     }
+                    .foregroundStyle(.white)
                     
                     Text("Discount Amount: \(discountAmount.formatted())%")
+                        .padding(.bottom)
+                        .foregroundStyle(.white)
                     
-                    HStack {
-                        Text("0")
-                        Slider(value: $salesPrice,
-                               in: 0...20000,
-                               step: 5)
-                        Text("20.000")
-                    }
-                    
-                    Text("Sales Price: \(salesPrice.formatted())$")
+                    TextField("Sales Price", text: $salesPrice)
+                        .textFieldStyle(.roundedBorder)
+                        .keyboardType(.numberPad)
+                        .frame(width: 250)
+                        .disabled(isAnimating)
                 }
-                .foregroundStyle(.white)
+                
                 .padding()
             }
     }
@@ -163,7 +175,7 @@ extension DiscountView {
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding()
-        .offset(x: isAnimating ? 0 : -550, y: screenSize.width / -4)
+        .offset(x: isAnimating ? 0 : -550, y: -100)
         .opacity(isAnimating ? 1 : 0)
         .animation(.easeInOut, value: isAnimating)
     }
@@ -206,11 +218,11 @@ extension DiscountView {
                     .fontWeight(.semibold)
             })
             .opacity(isAnimating ? 1 : 0)
-            .offset(x: isAnimating ? 0 : 550)
+            .offset(x: isAnimating ? 0 : 550, y: -150)
             .animation(.default, value: isAnimating)
             .onTapGesture {
                 // here we will calculate the discount and make animations.
-                salesPrice = 0.0
+                salesPrice = ""
                 discountAmount = 0.0
                 
                 

@@ -14,7 +14,6 @@
 		843FF80C2CB8C2E700A63499 /* DiscountCalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FF8072CB8C2E700A63499 /* DiscountCalculatorApp.swift */; };
 		84ABF83F2CBCA49C00F12BA1 /* PagesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABF83E2CBCA49C00F12BA1 /* PagesTabView.swift */; };
 		84ABF8492CBCA66700F12BA1 /* PersentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABF8482CBCA66700F12BA1 /* PersentageView.swift */; };
-		84B261672CBF0DB0009BDC20 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B261662CBF0DB0009BDC20 /* RateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +26,6 @@
 		843FF8072CB8C2E700A63499 /* DiscountCalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorApp.swift; sourceTree = "<group>"; };
 		84ABF83E2CBCA49C00F12BA1 /* PagesTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesTabView.swift; sourceTree = "<group>"; };
 		84ABF8482CBCA66700F12BA1 /* PersentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersentageView.swift; sourceTree = "<group>"; };
-		84B261662CBF0DB0009BDC20 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,7 +97,6 @@
 				84ABF83E2CBCA49C00F12BA1 /* PagesTabView.swift */,
 				843FF8052CB8C2E700A63499 /* DiscountView.swift */,
 				84ABF8482CBCA66700F12BA1 /* PersentageView.swift */,
-				84B261662CBF0DB0009BDC20 /* RateView.swift */,
 				843068982CBEF8BB00946F2C /* CommunViews */,
 			);
 			path = Views;
@@ -180,7 +177,6 @@
 			files = (
 				84ABF8492CBCA66700F12BA1 /* PersentageView.swift in Sources */,
 				8430687C2CBEF23F00946F2C /* TextFieldView.swift in Sources */,
-				84B261672CBF0DB0009BDC20 /* RateView.swift in Sources */,
 				843FF80B2CB8C2E700A63499 /* DiscountView.swift in Sources */,
 				84ABF83F2CBCA49C00F12BA1 /* PagesTabView.swift in Sources */,
 				843FF80C2CB8C2E700A63499 /* DiscountCalculatorApp.swift in Sources */,

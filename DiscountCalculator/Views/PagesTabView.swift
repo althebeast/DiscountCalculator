@@ -16,8 +16,6 @@ struct PagesTabView: View {
             
             PersentageView()
             
-            RateView()
-            
         }
         .tabViewStyle(.page)
         .ignoresSafeArea()

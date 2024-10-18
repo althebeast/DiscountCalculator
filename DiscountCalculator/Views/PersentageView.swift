@@ -13,36 +13,41 @@ struct PersentageView: View {
     @State var animate = false
     @State var showAlert = false
     @State var discountAmount = 0.0
-    @State var discountedPrice = 0.0
+    @State var discountedPrice = ""
     
     @State var calculatedAmount: Int = 0
     
     let screenSize: CGRect = UIScreen.main.bounds
     
     var body: some View {
-        ZStack {
-            backgroundColor()
-            
-            ZStack {
-                
-                calculatedAmountView()
-                    .opacity(isAnimating ? 1 : 0)
-                    .padding(.bottom, 30)
-                
-                VStack(spacing: 40) {
+        GeometryReader { geo in
+                ZStack {
+                    backgroundColor()
                     
-                    DiscountImageView()
-                    
-                    sliderView()
-                        .rotationEffect(Angle(degrees: isAnimating ? 220 : 0), anchor: .topLeading)
-                        .animation(.default, value: isAnimating)
-                    
-                    calculateButton()
-                    
-                    calculateAnotherAmountButton()
+                    VStack {
+                        ZStack {
+                            
+                            calculatedAmountView()
+                                .opacity(isAnimating ? 1 : 0)
+                            
+                            VStack(spacing: 20) {
+                                
+                                DiscountImageView()
+                                
+                                sliderView()
+                                    .rotationEffect(Angle(degrees: isAnimating ? 220 : 0), anchor: .topLeading)
+                                    .animation(.default, value: isAnimating)
+                                
+                                calculateButton()
+                                
+                                calculateAnotherAmountButton()
+                                    .padding(.bottom, 70)
+                                
+                            }
+                            .onAppear(perform: addAnimation)
+                        }
+                    }
                 }
-                .onAppear(perform: addAnimation)
-            }
         }
     }
     
@@ -66,7 +71,7 @@ struct PersentageView: View {
 
 extension PersentageView {
     private func backgroundColor() -> some View {
-        LinearGradient(colors: [Color("Background3"), Color("Background4")], startPoint: .top, endPoint: .bottom)
+        LinearGradient(colors: [Color("Background5"), Color("Background2")], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
     }
 }
@@ -101,8 +106,9 @@ extension PersentageView {
             .animation(.default, value: isAnimating)
             .onTapGesture {
                 // here we will calculate the discount and make animations.
+                let convertedDiscountedPrice = Double(discountedPrice) ?? 0
                 let calculatedDiscount = 100 - discountAmount
-                let calculatedDiscount2 = discountedPrice / calculatedDiscount
+                let calculatedDiscount2 = convertedDiscountedPrice / calculatedDiscount
                 let result = calculatedDiscount2 * 100
                 calculatedAmount = Int(result)
                 
@@ -126,20 +132,18 @@ extension PersentageView {
                                step: 5)
                         Text("100")
                     }
+                    .foregroundStyle(.white)
                     
                     Text("Discount Amount: \(discountAmount.formatted())%")
+                        .foregroundStyle(.white)
+                        .padding(.bottom)
                     
-                    HStack {
-                        Text("0")
-                        Slider(value: $discountedPrice,
-                               in: 0...20000,
-                               step: 5)
-                        Text("20.000")
-                    }
-                    
-                    Text("Discounted Price: \(discountedPrice.formatted())$")
+                    TextField("Discounted Price", text: $discountedPrice)
+                        .textFieldStyle(.roundedBorder)
+                        .keyboardType(.numberPad)
+                        .frame(width: 250)
+                        .disabled(isAnimating)
                 }
-                .foregroundStyle(.white)
                 .padding()
             }
     }
@@ -164,6 +168,7 @@ extension PersentageView {
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding()
+        .offset(y: -100)
         .opacity(isAnimating ? 1 : 0)
         .animation(.easeInOut, value: isAnimating)
     }
@@ -183,9 +188,10 @@ extension PersentageView {
             })
             .opacity(isAnimating ? 1 : 0)
             .animation(.easeInOut, value: isAnimating)
+            .offset(y: -100)
             .onTapGesture {
                 // here we will calculate the discount and make animations.
-                discountedPrice = 0.0
+                discountedPrice = ""
                 discountAmount = 0.0
                 
                 

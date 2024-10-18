@@ -11,7 +11,7 @@ import SwiftUI
 struct DiscountCalculatorApp: App {
     var body: some Scene {
         WindowGroup {
-            PagesTabView()
+                PagesTabView()
         }
     }
 }
