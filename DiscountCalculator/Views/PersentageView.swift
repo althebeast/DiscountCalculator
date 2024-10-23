@@ -21,6 +21,7 @@ struct PersentageView: View {
     
     var body: some View {
         GeometryReader { geo in
+            VStack {
                 ZStack {
                     backgroundColor()
                     
@@ -30,13 +31,14 @@ struct PersentageView: View {
                             calculatedAmountView()
                                 .opacity(isAnimating ? 1 : 0)
                             
-                            VStack(spacing: 20) {
+                            VStack(spacing: 40) {
                                 
                                 DiscountImageView()
                                 
                                 sliderView()
                                     .rotationEffect(Angle(degrees: isAnimating ? 220 : 0), anchor: .topLeading)
                                     .animation(.default, value: isAnimating)
+                                    .tint(.green)
                                 
                                 calculateButton()
                                 
@@ -44,10 +46,15 @@ struct PersentageView: View {
                                     .padding(.bottom, 70)
                                 
                             }
+                            .padding()
                             .onAppear(perform: addAnimation)
                         }
                     }
                 }
+                .onTapGesture {
+                    hideKeyboard1()
+                }
+            }
         }
     }
     
@@ -69,6 +76,13 @@ struct PersentageView: View {
     PersentageView()
 }
 
+// Extension to hide the keyboard
+extension View {
+    func hideKeyboard1() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 extension PersentageView {
     private func backgroundColor() -> some View {
         LinearGradient(colors: [Color("Background5"), Color("Background2")], startPoint: .top, endPoint: .bottom)
@@ -80,7 +94,7 @@ extension PersentageView {
     private func DiscountImageView() -> some View {
         Image("price-tag")
             .resizable()
-            .frame(width: 200, height: 200)
+            .frame(width: 150, height: 150)
             .scaleEffect(animate ? 1.2 : 1)
             .offset(y: isAnimating ? -750 : 0)
             .animation(.default, value: isAnimating)
@@ -168,9 +182,9 @@ extension PersentageView {
         .background(.thinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding()
-        .offset(y: -100)
         .opacity(isAnimating ? 1 : 0)
-        .animation(.easeInOut, value: isAnimating)
+        .offset(y: -100)
+        .animation(.default, value: isAnimating)
     }
 }
 
@@ -187,8 +201,8 @@ extension PersentageView {
                     .fontWeight(.semibold)
             })
             .opacity(isAnimating ? 1 : 0)
-            .animation(.easeInOut, value: isAnimating)
             .offset(y: -100)
+            .animation(.default, value: isAnimating)
             .onTapGesture {
                 // here we will calculate the discount and make animations.
                 discountedPrice = ""

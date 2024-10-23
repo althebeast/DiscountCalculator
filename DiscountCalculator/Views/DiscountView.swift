@@ -31,6 +31,8 @@ struct DiscountView: View {
                         }
                         VStack(spacing: 40) {
                             
+//                            tipJarView()
+                            
                             DiscountImageView()
                             
                             sliderView()
@@ -113,6 +115,27 @@ extension DiscountView {
 }
 
 extension DiscountView {
+    private func tipJarView() -> some View {
+        VStack {
+            HStack {
+                
+                Spacer()
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "heart.circle.fill")
+                        .font(.largeTitle)
+                }
+            }
+            .padding()
+            
+            Spacer()
+        }
+    }
+}
+
+extension DiscountView {
     private func sliderView() -> some View {
         RoundedRectangle(cornerRadius: 20)
             .frame(width: screenSize.width / 1.1, height: 200)
@@ -154,7 +177,7 @@ extension DiscountView {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 50, height: 50)
-                Text("Price after discount: $\(String(resultOfDiscount))")
+                Text("Price after discount: $\(resultOfDiscount.formatted())")
                     .font(.title2)
                     .fontWeight(.semibold)
             }

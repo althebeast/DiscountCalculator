@@ -12,6 +12,7 @@
 		843FF80A2CB8C2E700A63499 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843FF8042CB8C2E700A63499 /* Assets.xcassets */; };
 		843FF80B2CB8C2E700A63499 /* DiscountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FF8052CB8C2E700A63499 /* DiscountView.swift */; };
 		843FF80C2CB8C2E700A63499 /* DiscountCalculatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843FF8072CB8C2E700A63499 /* DiscountCalculatorApp.swift */; };
+		847A6EAF2CC99AE60012A8E5 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847A6EAE2CC99AE60012A8E5 /* RateView.swift */; };
 		84ABF83F2CBCA49C00F12BA1 /* PagesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABF83E2CBCA49C00F12BA1 /* PagesTabView.swift */; };
 		84ABF8492CBCA66700F12BA1 /* PersentageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84ABF8482CBCA66700F12BA1 /* PersentageView.swift */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,7 @@
 		843FF8052CB8C2E700A63499 /* DiscountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountView.swift; sourceTree = "<group>"; };
 		843FF8062CB8C2E700A63499 /* DiscountCalculator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DiscountCalculator.entitlements; sourceTree = "<group>"; };
 		843FF8072CB8C2E700A63499 /* DiscountCalculatorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCalculatorApp.swift; sourceTree = "<group>"; };
+		847A6EAE2CC99AE60012A8E5 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		84ABF83E2CBCA49C00F12BA1 /* PagesTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesTabView.swift; sourceTree = "<group>"; };
 		84ABF8482CBCA66700F12BA1 /* PersentageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersentageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +99,7 @@
 				84ABF83E2CBCA49C00F12BA1 /* PagesTabView.swift */,
 				843FF8052CB8C2E700A63499 /* DiscountView.swift */,
 				84ABF8482CBCA66700F12BA1 /* PersentageView.swift */,
+				847A6EAE2CC99AE60012A8E5 /* RateView.swift */,
 				843068982CBEF8BB00946F2C /* CommunViews */,
 			);
 			path = Views;
@@ -177,6 +180,7 @@
 			files = (
 				84ABF8492CBCA66700F12BA1 /* PersentageView.swift in Sources */,
 				8430687C2CBEF23F00946F2C /* TextFieldView.swift in Sources */,
+				847A6EAF2CC99AE60012A8E5 /* RateView.swift in Sources */,
 				843FF80B2CB8C2E700A63499 /* DiscountView.swift in Sources */,
 				84ABF83F2CBCA49C00F12BA1 /* PagesTabView.swift in Sources */,
 				843FF80C2CB8C2E700A63499 /* DiscountCalculatorApp.swift in Sources */,
@@ -313,7 +317,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Discount Buddy";
+				INFOPLIST_KEY_CFBundleDisplayName = "Discount Calculator Buddy";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -332,10 +337,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = alperensarisan.DiscountCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
@@ -353,7 +359,8 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Discount Buddy";
+				INFOPLIST_KEY_CFBundleDisplayName = "Discount Calculator Buddy";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -372,10 +379,11 @@
 				PRODUCT_BUNDLE_IDENTIFIER = alperensarisan.DiscountCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
