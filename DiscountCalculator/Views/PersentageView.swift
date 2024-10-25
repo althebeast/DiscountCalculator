@@ -34,6 +34,7 @@ struct PersentageView: View {
                             VStack(spacing: 40) {
                                 
                                 DiscountImageView()
+                                    .shadow(color: .white, radius: 10)
                                 
                                 sliderView()
                                     .rotationEffect(Angle(degrees: isAnimating ? 220 : 0), anchor: .topLeading)

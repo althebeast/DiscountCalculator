@@ -12,6 +12,7 @@ struct RateView: View {
     @State private var salesPrice = ""
     @State private var discountedPrice = ""
     @State private var isAnimating = false
+    @State private var animate = false
     @State private var calculatedRateResult = 0
     
     let screenSize: CGRect = UIScreen.main.bounds
@@ -23,15 +24,35 @@ struct RateView: View {
             ZStack {
                 
                 VStack {
+                    
                     calculatedAmountView()
                     calculateAnotherAmountButton()
                 }
                 
                 VStack(spacing: 40) {
+                    RateImageView()
+                        .shadow(color: .white, radius: 10)
+                    
                     textFields()
                     
                     calculateButton()
                 }
+            }
+            .onAppear(perform: addAnimation)
+        }
+        .onTapGesture {
+            hideKeyboard()
+        }
+    }
+    func addAnimation() {
+        guard !animate else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            withAnimation(
+                Animation
+                    .easeInOut(duration: 2.0)
+                    .repeatForever()
+            ) {
+                animate.toggle()
             }
         }
     }
@@ -50,8 +71,20 @@ extension View {
 
 extension RateView {
     private func backgroundColor() -> some View {
-        LinearGradient(colors: [Color("Background5"), Color("Background2")], startPoint: .top, endPoint: .bottom)
+        LinearGradient(colors: [Color("Background5"), Color("Background1")], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
+    }
+}
+
+extension RateView {
+    private func RateImageView() -> some View {
+        Image("tag")
+            .resizable()
+            .frame(width: 150, height: 150)
+            .offset(y: animate ? 0 : -25)
+            .offset(y: isAnimating ? -750 : 0)
+            .animation(.default, value: isAnimating)
+            .frame(maxWidth: .infinity)
     }
 }
 
@@ -90,7 +123,7 @@ extension RateView {
             .background(.thinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .overlay(content: {
-                Text("Calculate The Original Price")
+                Text("Calculate The Rate")
                     .foregroundStyle(.white)
                     .font(.title)
                     .fontWeight(.semibold)

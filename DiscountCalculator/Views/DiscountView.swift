@@ -20,7 +20,6 @@ struct DiscountView: View {
     let screenSize: CGRect = UIScreen.main.bounds
     
     var body: some View {
-            VStack {
                 ZStack {
                     
                     backgroundColor()
@@ -34,6 +33,7 @@ struct DiscountView: View {
 //                            tipJarView()
                             
                             DiscountImageView()
+                                .shadow(color: .white, radius: 10)
                             
                             sliderView()
                                 .offset(y: isAnimating ? -750 : 0)
@@ -48,10 +48,9 @@ struct DiscountView: View {
                         .onAppear(perform: addAnimation)
                     }
                 }
-            }
-            .onTapGesture {
-                hideKeyboard()
-            }
+                .onTapGesture {
+                    hideKeyboard()
+                }
     }
     
     func calculateThePriceAfterDiscount() {
